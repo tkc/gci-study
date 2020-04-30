@@ -1,0 +1,36 @@
+#!/bin/sh
+
+basename_src=/root/userspace/public
+basename_dest=/root/userspace/Workspace
+
+
+for index in `seq 10`
+do
+  dirname=week$index
+  src=$basename_src/$dirname
+  dest=$basename_dest/$dirname
+  for filename in `ls $src 2>/dev/null`
+  do
+    find $dest/$filename 1>/dev/null 2>&1
+    if [ ! $? -eq 0 ]; then
+      echo "${src}/${filename} -> ${dest}/${filename}"
+      cp -r $src/$filename $dest/
+    fi
+  done
+done
+
+
+for index in `seq 3`
+do
+  dirname=competition$index
+  src=$basename_src/$dirname
+  dest=$basename_dest/$dirname
+  for filename in `ls $src 2>/dev/null`
+  do
+    find $dest/$filename 1>/dev/null 2>&1
+    if [ ! $? -eq 0 ]; then
+      echo "${src}/${filename} -> ${dest}/${filename}"
+      cp -r $src/$filename $dest/
+    fi
+  done
+done
